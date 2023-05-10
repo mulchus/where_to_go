@@ -14,8 +14,7 @@ class Place(models.Model):
 
 
 class Image(models.Model):
-    sequence_number = models.AutoField(auto_created=True, primary_key=True, serialize=False,
-                                       verbose_name='ID')
+    sequence_number = models.IntegerField()
     title = models.CharField(max_length=200, default='no title')
     image = models.ImageField()
     place = models.ForeignKey('Place', related_name='images', null=True, on_delete=models.SET_NULL)

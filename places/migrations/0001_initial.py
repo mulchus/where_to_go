@@ -27,10 +27,11 @@ class Migration(migrations.Migration):
             name='Image',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                # ('sequence_number', models.IntegerField()),
-                ('title', models.CharField(max_length=200)),
+                ('sequence_number', models.IntegerField()),
+                ('title', models.CharField(default='no title', max_length=200)),
                 ('image', models.ImageField(upload_to='')),
-                ('place', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='images', to='places.place')),
+                ('place', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL,
+                                            related_name='images', to='places.place')),
             ],
         ),
     ]
