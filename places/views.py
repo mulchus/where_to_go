@@ -6,6 +6,9 @@ from .models import Place, Image
 # from where_to_go.settings import BASE_DIR
 from pathlib import Path
 from django.utils.safestring import SafeString
+from django.http import HttpResponse
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -15,20 +18,6 @@ def start(request):
     serialized_places = []
     places = Place.objects.all()
     for place in places:
-        images = []
-        for image in place.images.all():
-            images.append(os.path.join(BASE_DIR, image.image.url[1:]))
-            # images.append(os.path.join('C:/PythonProjects/where_to_go/', image.image.url[1:]))
-        detailsurl = json.dumps({
-            'title': place.title,
-            'imgs': images,
-            'description_short': place.description_short,
-            'description_long': place.description_long,
-            'coordinates': {
-                'lng': str(place.lng),
-                'lat': str(place.lat)
-            }
-        })
         one_place = {
             "type": "Feature",
             "geometry": {
@@ -38,7 +27,7 @@ def start(request):
             "properties": {
                 "title": place.short_title,
                 "placeId": place.placeId,
-                "detailsUrl": detailsurl,
+                "detailsUrl": details_url,
             }
         }
         serialized_places.append(one_place)
@@ -50,3 +39,22 @@ def start(request):
     # serialized_places = json.dumps(serialized_places, ensure_ascii=False, indent=4)
     print(serialized_places)
     return render(request, 'index.html', {'serialized_places': serialized_places})
+
+
+def place_view(request, place_id):
+    place = get_object_or_404(Place, pk=place_id)
+    images = []
+    place_images = place.images.all()
+    for image in place_images:
+        images.append(os.path.join(BASE_DIR, image.image.url[1:]))
+    details_url = {
+        'title': place.title,
+        'imgs': images,
+        'description_short': place.description_short,
+        'description_long': place.description_long,
+        'coordinates': {
+            'lng': str(place.lng),
+            'lat': str(place.lat)
+        }
+    }
+    return JsonResponse(details_url, json_dumps_params={'indent': 4, 'ensure_ascii': False})
