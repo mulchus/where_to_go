@@ -1,12 +1,7 @@
 import os
-import json
 from django.shortcuts import render
-from .models import Place, Image
-# from pathlib import Path
-# from where_to_go.settings import BASE_DIR
+from .models import Place
 from pathlib import Path
-from django.utils.safestring import SafeString
-from django.http import HttpResponse
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 
@@ -36,7 +31,6 @@ def start(request):
         "type": "FeatureCollection",
         "features": serialized_places
     }
-    # serialized_places = json.dumps(serialized_places, ensure_ascii=False, indent=4)
     print(serialized_places)
     return render(request, 'index.html', {'serialized_places': serialized_places})
 
