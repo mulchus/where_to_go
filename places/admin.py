@@ -1,11 +1,19 @@
 from django.contrib import admin
+from django.utils.safestring import mark_safe
+from django.utils.html import format_html
 from .models import Place, Image
 
 
 class ImageInline(admin.TabularInline):
     model = Image
-    fields = ('image', 'sequence_number')
+    fields = ('image', 'get_preview', 'sequence_number')
+    ordering = ('sequence_number', )
+    readonly_fields = ('get_preview', )
     extra = 0
+
+    @staticmethod
+    def get_preview(obj):
+        return format_html(f'<img src="{mark_safe(obj.image.url)}" height="200px" />')
 
 
 @admin.register(Place)

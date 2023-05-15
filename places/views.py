@@ -1,4 +1,3 @@
-import os
 from django.shortcuts import render
 from .models import Place
 from pathlib import Path
