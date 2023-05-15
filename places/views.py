@@ -32,7 +32,6 @@ def start(request):
         "type": "FeatureCollection",
         "features": serialized_places
     }
-    print(serialized_places)
     return render(request, 'index.html', {'serialized_places': serialized_places})
 
 
