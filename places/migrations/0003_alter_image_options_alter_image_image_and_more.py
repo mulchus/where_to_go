@@ -15,10 +15,6 @@ class Migration(migrations.Migration):
             name='image',
             options={'ordering': ['sequence_number']},
         ),
-        migrations.AlterModelOptions(
-            name='place',
-            options={'ordering': ['place_order']},
-        ),
         migrations.AlterField(
             model_name='image',
             name='image',
@@ -42,7 +38,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='place',
             name='description_long',
-            field=models.TextField(verbose_name='полное описание'),
+            field=tinymce.models.HTMLField(verbose_name='полное описание'),
         ),
         migrations.AlterField(
             model_name='place',
@@ -73,10 +69,5 @@ class Migration(migrations.Migration):
             model_name='place',
             name='title',
             field=models.CharField(max_length=200, verbose_name='название'),
-        ),
-        migrations.AddField(
-            model_name='place',
-            name='place_order',
-            field=models.PositiveIntegerField(default=0),
         ),
     ]

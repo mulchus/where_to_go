@@ -1,4 +1,5 @@
 from django.db import models
+from tinymce.models import HTMLField
 
 
 class Place(models.Model):
@@ -6,13 +7,13 @@ class Place(models.Model):
     short_title = models.CharField(max_length=30, verbose_name='короткое название')
     placeId = models.CharField(max_length=30, verbose_name='уникальный идентификатор')
     description_short = models.TextField(verbose_name='короткое описание')
-    description_long = models.TextField(verbose_name='полное описание')
+    description_long = HTMLField(verbose_name='полное описание')
     lng = models.FloatField(verbose_name='долгота')
     lat = models.FloatField(verbose_name='широта')
-    place_order = models.PositiveIntegerField(default=0, blank=False, null=False)
-
-    class Meta:
-        ordering = ['place_order']
+    # place_order = models.PositiveIntegerField(default=0, blank=False, null=False)
+    #
+    # class Meta:
+    #     ordering = ['place_order']
 
     def __str__(self):
         return self.title
