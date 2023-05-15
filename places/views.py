@@ -13,6 +13,7 @@ def start(request):
     serialized_places = []
     places = Place.objects.all()
     for place in places:
+        details_url = f'/places/{place.pk}'
         one_place = {
             "type": "Feature",
             "geometry": {
@@ -38,9 +39,9 @@ def start(request):
 def place_view(request, place_id):
     place = get_object_or_404(Place, pk=place_id)
     images = []
-    place_images = place.images.all()
+    place_images = place.images.all().order_by('sequence_number')
     for image in place_images:
-        images.append(os.path.join(BASE_DIR, image.image.url[1:]))
+        images.append(image.image.url[1:])
     details_url = {
         'title': place.title,
         'imgs': images,
