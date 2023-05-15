@@ -20,6 +20,9 @@ class Image(models.Model):
     image = models.ImageField(verbose_name='картинка')
     place = models.ForeignKey('Place', related_name='images', null=True, on_delete=models.SET_NULL,
                               verbose_name='относится к')
+    
+    class Meta:
+        ordering = ['sequence_number']
 
     def __str__(self):
         return f'{self.sequence_number} {self.place}'
