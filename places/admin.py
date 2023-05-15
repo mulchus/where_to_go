@@ -1,11 +1,11 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 from django.utils.html import format_html
-from adminsortable2.admin import SortableTabularInline, SortableAdminBase, SortableAdminMixin
+from adminsortable2.admin import SortableStackedInline, SortableTabularInline, SortableAdminBase, SortableAdminMixin
 from .models import Place, Image
 
 
-class ImageInline(admin.TabularInline):
+class ImageTabularInline(SortableTabularInline):
     model = Image
     fields = ('image', 'get_preview', 'sequence_number')
     ordering = ('sequence_number', )
@@ -18,16 +18,16 @@ class ImageInline(admin.TabularInline):
 
 
 @admin.register(Place)
-class PlaceAdmin(admin.ModelAdmin):
+class SortablePlaceAdmin(SortableAdminBase, admin.ModelAdmin):
     list_display = ('title', 'lng', 'lat')
-    inlines = [ImageInline, ]
+    inlines = [ImageTabularInline, ]
     extra = 0
 
 
 @admin.register(Image)
-class ImageAdmin(admin.ModelAdmin):
+class SortableImageAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_display = ('sequence_number', 'get_preview', 'title', 'place', )
-    ordering = ('place', 'sequence_number',)
+    ordering = ('sequence_number', )
     extra = 0
 
     @staticmethod

@@ -15,6 +15,10 @@ class Migration(migrations.Migration):
             name='image',
             options={'ordering': ['sequence_number']},
         ),
+        migrations.AlterModelOptions(
+            name='place',
+            options={'ordering': ['place_order']},
+        ),
         migrations.AlterField(
             model_name='image',
             name='image',
@@ -28,7 +32,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='image',
             name='sequence_number',
-            field=models.IntegerField(verbose_name='позиция'),
+            field=models.PositiveIntegerField(default=0, verbose_name='позиция'),
         ),
         migrations.AlterField(
             model_name='image',
@@ -69,5 +73,10 @@ class Migration(migrations.Migration):
             model_name='place',
             name='title',
             field=models.CharField(max_length=200, verbose_name='название'),
+        ),
+        migrations.AddField(
+            model_name='place',
+            name='place_order',
+            field=models.PositiveIntegerField(default=0),
         ),
     ]
