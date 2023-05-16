@@ -10,7 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
-import dotenv
+# import dotenv
+from dotenv import dotenv_values
+
 
 from pathlib import Path
 from django.core.management.utils import get_random_secret_key
@@ -24,35 +26,41 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # print(get_random_secret_key())
 
-dotenv_file = os.path.join(BASE_DIR, ".env")
-if os.path.isfile(dotenv_file):
-    dotenv.load_dotenv(dotenv_file)
+# dotenv_file = os.path.join(BASE_DIR, ".env")
+# if os.path.isfile(dotenv_file):
+#     dotenv.load_dotenv(dotenv_file)
 
-SECRET_KEY = os.environ['SECRET_KEY']
+config = dotenv_values(".env")
+
+SECRET_KEY = config['SECRET_KEY']
+# SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # security.W018
-DEBUG = False  # os.environ['DEBUG']
-# ALLOWED_HOSTS = os.environ['ALLOWED_HOSTS'].split(' ')
-# ALLOWED_HOSTS = ('localhost', '127.0.0.1:8000')
-ALLOWED_HOSTS = ('*', )
+DEBUG = config['DEBUG'] == 'True'
+ALLOWED_HOSTS = config['ALLOWED_HOSTS'].split(' ')
 
 # security.W004
-# SECURE_HSTS_SECONDS = os.environ['SECURE_HSTS_SECONDS']
+SECURE_HSTS_SECONDS = config['SECURE_HSTS_SECONDS']
 
 # security.W012
-# SESSION_COOKIE_SECURE = os.environ['SESSION_COOKIE_SECURE']
+SESSION_COOKIE_SECURE = config['SESSION_COOKIE_SECURE'] == 'True'
 
 # security.W016
-# CSRF_COOKIE_SECURE = os.environ['CSRF_COOKIE_SECURE']
+CSRF_COOKIE_SECURE = config['CSRF_COOKIE_SECURE'] == 'True'
 
 # Another security settings
-# SECURE_HSTS_PRELOAD = True  # os.environ['SECURE_HSTS_PRELOAD']
-# SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # os.environ['SECURE_HSTS_INCLUDE_SUBDOMAINS']
+SECURE_HSTS_PRELOAD = config['SECURE_HSTS_PRELOAD'] == 'True'
+SECURE_HSTS_INCLUDE_SUBDOMAINS = config['SECURE_HSTS_INCLUDE_SUBDOMAINS'] == 'True'
 
 # security.W008
-# SECURE_SSL_REDIRECT = True  # !!! # Аккуратно. Yandex теперь не отпускет редирект.
-# SECURE_REDIRECT_EXEMPT = [r'127.0.0.1|', r'localhost:8000', r'http://localhost:8000/']
+# !!! # Аккуратно. Yandex теперь не отпускет редирект.
+SECURE_SSL_REDIRECT = config['SECURE_SSL_REDIRECT'] == 'True'
+SECURE_REDIRECT_EXEMPT = [r'127.0.0.1|', r'localhost|']  # [r'^no-ssl/$', …]
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# print(f'SECURE_SSL_REDIRECT {SECURE_SSL_REDIRECT}')
+# for key, value in config.items():
+#     print(f'{key} = {value}')
 
 
 # Application definition
@@ -145,7 +153,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
+
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static/where_to_go"),
