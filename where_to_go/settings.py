@@ -10,23 +10,49 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
+import dotenv
 
 from pathlib import Path
+from django.core.management.utils import get_random_secret_key
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-yhr_z#-h61*9fcv81c$mzez_2kmadw4v6dc9qtap7-sl1+s$9='
+# print(get_random_secret_key())
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+dotenv_file = os.path.join(BASE_DIR, ".env")
+if os.path.isfile(dotenv_file):
+    dotenv.load_dotenv(dotenv_file)
 
-ALLOWED_HOSTS = []
+SECRET_KEY = os.environ['SECRET_KEY']
+
+# security.W018
+DEBUG = False  # os.environ['DEBUG']
+# ALLOWED_HOSTS = os.environ['ALLOWED_HOSTS'].split(' ')
+# ALLOWED_HOSTS = ('localhost', '127.0.0.1:8000')
+ALLOWED_HOSTS = ('*', )
+
+# security.W004
+# SECURE_HSTS_SECONDS = os.environ['SECURE_HSTS_SECONDS']
+
+# security.W012
+# SESSION_COOKIE_SECURE = os.environ['SESSION_COOKIE_SECURE']
+
+# security.W016
+# CSRF_COOKIE_SECURE = os.environ['CSRF_COOKIE_SECURE']
+
+# Another security settings
+# SECURE_HSTS_PRELOAD = True  # os.environ['SECURE_HSTS_PRELOAD']
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # os.environ['SECURE_HSTS_INCLUDE_SUBDOMAINS']
+
+# security.W008
+# SECURE_SSL_REDIRECT = True  # !!! # Аккуратно. Yandex теперь не отпускет редирект.
+# SECURE_REDIRECT_EXEMPT = [r'127.0.0.1|', r'localhost:8000', r'http://localhost:8000/']
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 # Application definition
