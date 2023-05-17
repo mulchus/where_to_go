@@ -3,6 +3,7 @@ from django.utils.safestring import mark_safe
 from django.utils.html import format_html
 from adminsortable2.admin import SortableStackedInline, SortableTabularInline, SortableAdminBase, SortableAdminMixin
 from .models import Place, Image
+from where_to_go.settings import DEBUG
 
 
 class ImageTabularInline(SortableTabularInline):
@@ -25,12 +26,13 @@ class SortablePlaceAdmin(SortableAdminBase, admin.ModelAdmin):
     extra = 0
 
 
-@admin.register(Image)
-class SortableImageAdmin(SortableAdminMixin, admin.ModelAdmin):
-    list_display = ('sequence_number', 'get_preview', 'title', 'place', )
-    ordering = ('sequence_number', )
-    extra = 0
+if DEBUG:
+    @admin.register(Image)
+    class SortableImageAdmin(SortableAdminMixin, admin.ModelAdmin):
+        list_display = ('sequence_number', 'get_preview', 'title', 'place', )
+        ordering = ('sequence_number', )
+        extra = 0
 
-    @staticmethod
-    def get_preview(obj):
-        return format_html(f'<img src="{mark_safe(obj.image.url)}" height="50px" />')
+        @staticmethod
+        def get_preview(obj):
+            return format_html(f'<img src="{mark_safe(obj.image.url)}" height="50px" />')
