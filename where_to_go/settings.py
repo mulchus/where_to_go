@@ -55,12 +55,8 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = config['SECURE_HSTS_INCLUDE_SUBDOMAINS'] == 'Tr
 # security.W008
 # !!! # Аккуратно. Yandex теперь не отпускет редирект.
 SECURE_SSL_REDIRECT = config['SECURE_SSL_REDIRECT'] == 'True'
-SECURE_REDIRECT_EXEMPT = [r'127.0.0.1|', r'localhost|']  # [r'^no-ssl/$', …]
-# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
+SECURE_REDIRECT_EXEMPT = [r'127.0.0.1|', r'localhost|']
 # print(f'SECURE_SSL_REDIRECT {SECURE_SSL_REDIRECT}')
-# for key, value in config.items():
-#     print(f'{key} = {value}')
 
 
 # Application definition
