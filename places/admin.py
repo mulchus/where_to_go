@@ -20,6 +20,7 @@ class ImageTabularInline(SortableTabularInline):
 @admin.register(Place)
 class SortablePlaceAdmin(SortableAdminBase, admin.ModelAdmin):
     list_display = ('title', 'lng', 'lat')
+    search_fields = ['title']
     inlines = [ImageTabularInline, ]
     extra = 0
 
