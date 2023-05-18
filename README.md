@@ -61,7 +61,8 @@ python manage.py load_place "Коворкинг Gravity" "https://github.com/...
 Часть настроек проекта берётся из переменных окружения. Чтобы их определить, создайте файл `.env` рядом с `manage.py` и запишите туда данные в таком формате: `ПЕРЕМЕННАЯ = значение`:  
 - `SECRET_KEY` — секретный ключ проекта в Django. Например: `erofheronoirenfoernfx49389f43xf3984xf9384`.  
 - `DEBUG` — дебаг-режим. Поставьте `True`, чтобы увидеть отладочную информацию в случае ошибки. Выключается значением `False`.  
-- `ALLOWED_HOSTS` — необходим, если `DEBUG = False`. По умолчанию заданы localhost и 127.0.0.1. [документация Django](https://docs.djangoproject.com/en/3.1/ref/settings/#allowed-hosts).
+- `ALLOWED_HOSTS` — необходим, если `DEBUG = False`. По умолчанию заданы localhost и 127.0.0.1.  
+[документация Django](https://docs.djangoproject.com/en/3.1/ref/settings/#allowed-hosts).
 
 **Для запуска проекта следующие настройки менять не требуется, значения проставлены для деплоя.**  
 - `SECURE_HSTS_SECONDS = 1` 
