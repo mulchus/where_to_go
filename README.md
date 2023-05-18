@@ -1,11 +1,11 @@
 ﻿# Куда пойти? (Where to go?)
 
 Этот сайт - интерактивная карта Москвы, на которую нанесены все известные виды активного отдыха с подробными описаниями и комментариями.  
-Пользовательская часть сайта расположена по адресу [where_to_go.pythonanywhere.com](https://where_to_go.pythonanywhere.com).  
+Пользовательская часть сайта расположена по адресу [mulch.pythonanywhere.com](https://mulch.pythonanywhere.com).  
 Основной вид сайта:  
 ![user_view](https://github.com/mulchus/where_to_go/assets/111083714/4f6f4268-45b6-4e1c-b0fa-f45489ddc423)
 
-Вход для администраторов и операторов осуществляется по адресу [where_to_go.pythonanywhere.com/admin](https://where_to_go.pythonanywhere.com/admin).  
+Вход для администраторов и операторов осуществляется по адресу [mulch.pythonanywhere.com/admin](https://mulch.pythonanywhere.com/admin).  
 Вид админки при редактировании места:  
 ![admin_view](https://github.com/mulchus/where_to_go/assets/111083714/136fffe9-5d92-42dd-ae42-3008d0998e42)
 
