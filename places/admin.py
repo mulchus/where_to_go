@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 from django.utils.html import format_html
-from adminsortable2.admin import SortableStackedInline, SortableTabularInline, SortableAdminBase, SortableAdminMixin
+from adminsortable2.admin import SortableTabularInline, SortableAdminBase, SortableAdminMixin
 from .models import Place, Image
 from where_to_go.settings import DEBUG
 

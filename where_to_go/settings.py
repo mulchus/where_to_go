@@ -10,12 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
-# import dotenv
 from dotenv import dotenv_values
 
-
 from pathlib import Path
-from django.core.management.utils import get_random_secret_key
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,16 +21,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
-# print(get_random_secret_key())
-
-# dotenv_file = os.path.join(BASE_DIR, ".env")
-# if os.path.isfile(dotenv_file):
-#     dotenv.load_dotenv(dotenv_file)
-
-config = dotenv_values(".env")
+config = dotenv_values(os.path.join(BASE_DIR, '.env'))
 
 SECRET_KEY = config['SECRET_KEY']
-# SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # security.W018
 DEBUG = config['DEBUG'] == 'True'
@@ -56,7 +46,6 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = config['SECURE_HSTS_INCLUDE_SUBDOMAINS'] == 'Tr
 # !!! # Аккуратно. Yandex теперь не отпускет редирект.
 SECURE_SSL_REDIRECT = config['SECURE_SSL_REDIRECT'] == 'True'
 SECURE_REDIRECT_EXEMPT = [r'127.0.0.1|', r'localhost|']
-# print(f'SECURE_SSL_REDIRECT {SECURE_SSL_REDIRECT}')
 
 
 # Application definition
@@ -151,7 +140,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static/where_to_go"),

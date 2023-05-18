@@ -23,6 +23,7 @@ class Command(BaseCommand):
                             )
 
     def handle(self, *args, **options):
+        Path(MEDIA_ROOT).mkdir(parents=True, exist_ok=True)
         response = requests.get(options['url_about_place'])
         response.raise_for_status()
         new_place = response.json()
