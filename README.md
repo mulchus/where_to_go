@@ -6,8 +6,12 @@
 ![user_view](https://github.com/mulchus/where_to_go/assets/111083714/4f6f4268-45b6-4e1c-b0fa-f45489ddc423)
 
 Вход для администраторов и операторов осуществляется по адресу [mulch.pythonanywhere.com/admin](https://mulch.pythonanywhere.com/admin).  
+Тестовые логин - `test`,  
+пароль - `testovtest`.  
+
 Вид админки при редактировании места:  
-![admin_view](https://github.com/mulchus/where_to_go/assets/111083714/136fffe9-5d92-42dd-ae42-3008d0998e42)
+![admin_view](https://github.com/mulchus/where_to_go/assets/111083714/136fffe9-5d92-42dd-ae42-3008d0998e42).  
+
 
 
 ## Автоматизированная загрузка мест
