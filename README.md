@@ -70,7 +70,7 @@ python manage.py load_place "Коворкинг Gravity" "https://github.com/...
 - `CSRF_COOKIE_SECURE = True`
 - `SECURE_HSTS_PRELOAD = True`
 - `SECURE_HSTS_INCLUDE_SUBDOMAINS = True`
-- `SECURE_SSL_REDIRECT = True`
+- `SECURE_SSL_REDIRECT = True`  
 [документация по настройкам Django Deployment checklist](https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/).
 
 
