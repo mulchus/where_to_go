@@ -63,9 +63,11 @@ python manage.py load_place "https://github.com/.....places/Коворкинг G
 - `SECRET_KEY` — секретный ключ проекта в Django. Например: `erofheronoirenfoernfx49389f43xf3984xf9384`.  
 - `DEBUG` — дебаг-режим. Поставьте `True`, чтобы увидеть отладочную информацию в случае ошибки. Выключается значением `False`.  
 - `ALLOWED_HOSTS` — по умолчанию заданы localhost и 127.0.0.1.  
+- `CSRF_TRUSTED_ORIGINS = http://subdomen.domen.com` - домен/субдомен сайта.  
+- `SECURE_REDIRECT_EXEMPT = (r'subdomen.domen.com|', )` - домен/субдомен сайта.  
 [документация Django](https://docs.djangoproject.com/en/3.1/ref/settings/#allowed-hosts).
 
-**Для запуска проекта следующие настройки менять не требуется, значения проставлены для деплоя.**  
+Для запуска проекта следующие настройки менять не требуется, значения проставлены для деплоя. 
 - `SECURE_HSTS_SECONDS = 10` 
 - `SESSION_COOKIE_SECURE = True`
 - `CSRF_COOKIE_SECURE = True`
