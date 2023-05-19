@@ -10,8 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
-from dotenv import dotenv_values
 
+from environs import Env
 from pathlib import Path
 
 
@@ -21,31 +21,33 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
-config = dotenv_values(os.path.join(BASE_DIR, '.env'))
+env = Env()
+env.read_env()
+# config = dotenv_values(os.path.join(BASE_DIR, '.env'))
 
-SECRET_KEY = config['SECRET_KEY']
+SECRET_KEY = env.str('SECRET_KEY')
 
 # security.W018
-DEBUG = config['DEBUG'] == 'True'
-ALLOWED_HOSTS = config['ALLOWED_HOSTS'].split(' ')
+DEBUG = env.bool('DEBUG')
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
 # security.W004
-SECURE_HSTS_SECONDS = config['SECURE_HSTS_SECONDS']
+SECURE_HSTS_SECONDS = env.int('SECURE_HSTS_SECONDS')
 
 # security.W012
-SESSION_COOKIE_SECURE = config['SESSION_COOKIE_SECURE'] == 'True'
+SESSION_COOKIE_SECURE = env.bool('SESSION_COOKIE_SECURE')
 
 # security.W016
-CSRF_COOKIE_SECURE = config['CSRF_COOKIE_SECURE'] == 'True'
+CSRF_COOKIE_SECURE = env.bool('CSRF_COOKIE_SECURE')
 
 # Another security settings
-SECURE_HSTS_PRELOAD = config['SECURE_HSTS_PRELOAD'] == 'True'
-SECURE_HSTS_INCLUDE_SUBDOMAINS = config['SECURE_HSTS_INCLUDE_SUBDOMAINS'] == 'True'
+SECURE_HSTS_PRELOAD = env.bool('SECURE_HSTS_PRELOAD')
+SECURE_HSTS_INCLUDE_SUBDOMAINS = env.bool('SECURE_HSTS_INCLUDE_SUBDOMAINS')
 
 # security.W008
 # !!! # Аккуратно. Yandex теперь не отпускет редирект.
-SECURE_SSL_REDIRECT = config['SECURE_SSL_REDIRECT'] == 'True'
-SECURE_REDIRECT_EXEMPT = [r'127.0.0.1|', r'localhost|']
+SECURE_SSL_REDIRECT = env.bool('SECURE_SSL_REDIRECT')
+SECURE_REDIRECT_EXEMPT = (r'127.0.0.1|', r'localhost|')
 
 
 # Application definition
@@ -138,7 +140,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
