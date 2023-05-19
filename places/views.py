@@ -14,22 +14,22 @@ def start(request):
     for place in places:
         details_url = f'/places/{place.pk}'
         one_place = {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [place.lng, place.lat]
+            'type': 'Feature',
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [place.lng, place.lat]
             },
-            "properties": {
-                "title": place.short_title,
-                "placeId": place.placeId,
-                "detailsUrl": details_url,
+            'properties': {
+                'title': place.short_title,
+                'placeId': place.placeId,
+                'detailsUrl': details_url,
             }
         }
         serialized_places.append(one_place)
 
     serialized_places = {
-        "type": "FeatureCollection",
-        "features": serialized_places
+        'type': 'FeatureCollection',
+        'features': serialized_places
     }
     return render(request, 'index.html', {'serialized_places': serialized_places})
 

@@ -29,7 +29,7 @@ class Command(BaseCommand):
         new_place = response.json()
         new_place_lng = new_place['coordinates']['lng']
         new_place_lat = new_place['coordinates']['lat']
-        new_place_placeid = f"{new_place_lng}-{new_place_lat}"
+        new_place_placeid = f'{new_place_lng}-{new_place_lat}'
 
         place, place_created = Place.objects.get_or_create(
             placeId=new_place_placeid,
