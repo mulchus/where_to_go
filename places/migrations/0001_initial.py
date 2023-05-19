@@ -2,6 +2,7 @@
 
 from django.db import migrations, models
 import django.db.models.deletion
+import tinymce.models
 
 
 class Migration(migrations.Migration):
@@ -16,22 +17,22 @@ class Migration(migrations.Migration):
             name='Place',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=200)),
-                ('description_short', models.TextField()),
-                ('description_long', models.TextField()),
-                ('lng', models.FloatField()),
-                ('lat', models.FloatField()),
+                ('title', models.CharField(max_length=200, verbose_name='название')),
+                ('description_short', models.TextField(blank=True, verbose_name='короткое описание')),
+                ('description_long', tinymce.models.HTMLField(blank=True, verbose_name='полное описание')),
+                ('lng', models.FloatField(verbose_name='долгота')),
+                ('lat', models.FloatField(verbose_name='широта')),
             ],
         ),
         migrations.CreateModel(
             name='Image',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('sequence_number', models.IntegerField()),
-                ('title', models.CharField(default='no title', max_length=200)),
-                ('image', models.ImageField(upload_to='')),
+                ('sequence_number', models.PositiveIntegerField(default=0, verbose_name='позиция')),
+                ('image', models.ImageField(upload_to='', verbose_name='картинка')),
                 ('place', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL,
-                                            related_name='images', to='places.place')),
+                                            related_name='images', to='places.place', verbose_name='относится к')),
             ],
+            options={'ordering': ['sequence_number']},
         ),
     ]

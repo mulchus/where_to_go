@@ -11,11 +11,6 @@ class Command(BaseCommand):
     help = 'Добавить место на карту'
 
     def add_arguments(self, parser):
-        parser.add_argument('place_short_title',
-                            nargs='?',
-                            type=str,
-                            help='Короткое имя локации',
-                            )
         parser.add_argument('url_about_place',
                             nargs='?',
                             type=str,
@@ -29,22 +24,19 @@ class Command(BaseCommand):
         new_place = response.json()
         new_place_lng = new_place['coordinates']['lng']
         new_place_lat = new_place['coordinates']['lat']
-        new_place_placeid = f'{new_place_lng}-{new_place_lat}'
 
         place, place_created = Place.objects.get_or_create(
-            placeId=new_place_placeid,
             title=new_place['title'],
-            defaults={'short_title': options['place_short_title'],
-                      'description_short': new_place['description_short'],
-                      'description_long': new_place['description_long'],
-                      'lng': float(new_place_lng),
-                      'lat': float(new_place_lat)},
+            lng=float(new_place_lng),
+            lat=float(new_place_lat),
+            defaults={'description_short': new_place['description_short'],
+                      'description_long': new_place['description_long']},
         )
 
         if not place_created:
-            print(f'Место "{place.title}", координаты {place.placeId} уже есть в базе данных.')
+            print(f'Место "{new_place["title"]}" уже есть в базе данных.')
         else:
-            print(f'Добавлено место "{place.title}", координаты {place.placeId}.')
+            print(f'Добавлено место "{new_place["title"]}".')
             for image_num, image_url in enumerate(new_place['imgs']):
                 response = requests.get(image_url)
                 response.raise_for_status()
@@ -55,8 +47,7 @@ class Command(BaseCommand):
                 image, image_created = Image.objects.get_or_create(
                     image=image_name,
                     place_id=place.id,
-                    defaults={'sequence_number': image_num,
-                              'title': 'no title'},
+                    defaults={'sequence_number': image_num, },
                 )
                 if not image_created:
                     print(f'Фотография "{image.image}" уже имеется в базе данных у данной локации.')

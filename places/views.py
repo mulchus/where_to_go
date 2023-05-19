@@ -20,8 +20,8 @@ def start(request):
                 'coordinates': [place.lng, place.lat]
             },
             'properties': {
-                'title': place.short_title,
-                'placeId': place.placeId,
+                'title': place.title,
+                'placeId': place.pk,
                 'detailsUrl': details_url,
             }
         }

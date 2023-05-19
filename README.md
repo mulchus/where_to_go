@@ -36,13 +36,13 @@
 
 Загрузка данных осуществляется следующей командой:  
 ```
-python manage.py load_place "короткое название" "путь/к файлу/о месте.json"
+python manage.py load_place "путь/к файлу/о месте.json"
 ```
 например:  
 ```
-python manage.py load_place "Коворкинг Gravity" "https://github.com/.....places/Коворкинг Gravity.json"
+python manage.py load_place "https://github.com/.....places/Коворкинг Gravity.json"
 ```
-Если короткое название или путь к файлу json не содержит пробелов, то их можно не заключать в двойные кавычки.  
+Если путь к файлу json не содержит пробелов, то их можно не заключать в двойные кавычки.  
 
 В результате скрипт должен вывести в консоли следующую информацию о загрузке (пример):
 ![загрузка мест](https://github.com/mulchus/where_to_go/assets/111083714/a5f8cd09-18d8-48fe-b39a-a1343dc89091)
