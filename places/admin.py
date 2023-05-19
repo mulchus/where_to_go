@@ -22,3 +22,8 @@ class SortablePlaceAdmin(SortableAdminBase, admin.ModelAdmin):
     search_fields = ['title']
     inlines = [ImageTabularInline, ]
     extra = 0
+
+
+admin.site.site_header = 'Панель администратора'
+admin.site.site_title = '"Куда пойти?"'
+admin.site.index_title = 'Доступные разделы:'
