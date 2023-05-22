@@ -53,7 +53,6 @@ python manage.py load_place "https://github.com/.....places/Коворкинг G
 - `ALLOWED_HOSTS` — по умолчанию заданы localhost и 127.0.0.1.  
 - `STATIC_ROOT` - папка для сбора статики сайта при размещении на сервере, например "assets". Нельзя задавать "static".  
 - `CSRF_TRUSTED_ORIGINS = http://subdomen.domen.com` - домен/субдомен сайта.  
-- `SECURE_REDIRECT_EXEMPT = (r'subdomen.domen.com|', )` - домен/субдомен сайта.  
 [документация Django](https://docs.djangoproject.com/en/3.1/ref/settings/#allowed-hosts).
 
 Для запуска проекта следующие настройки менять не требуется, значения проставлены для деплоя. 
@@ -78,6 +77,10 @@ python manage.py load_place "https://github.com/.....places/Коворкинг G
 
 Сайт будет работать по ссылке [127.0.0.1:8000](http://127.0.0.1:8000).  
 
+Для регистрации администратора сайта введите команду `python manage.py createsuperuser`,  
+после чего введите выбранный вами логин, e-mail и пароль администратора (2 раза).  
+При вводе пароля символы не отображаются. Ввод завершается нажатием Enter.  
+Затем повторно запустите сервер. 
 
 ## Цели проекта
 

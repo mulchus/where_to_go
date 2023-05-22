@@ -45,9 +45,10 @@ SECURE_HSTS_PRELOAD = env.bool('SECURE_HSTS_PRELOAD')
 SECURE_HSTS_INCLUDE_SUBDOMAINS = env.bool('SECURE_HSTS_INCLUDE_SUBDOMAINS')
 
 # security.W008
-# !!! # Аккуратно. Yandex теперь не отпускет редирект.
 SECURE_SSL_REDIRECT = env.bool('SECURE_SSL_REDIRECT')
-SECURE_REDIRECT_EXEMPT = (r'127.0.0.1|', r'localhost|')
+SECURE_REDIRECT_EXEMPT = []
+for ALLOWED_HOST in ALLOWED_HOSTS:
+    SECURE_REDIRECT_EXEMPT.append(rf'{ALLOWED_HOST}|')
 
 
 # Application definition
