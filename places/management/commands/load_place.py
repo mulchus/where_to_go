@@ -28,15 +28,15 @@ class Command(BaseCommand):
             title=row_place['title'],
             lng=row_place_lng,
             lat=row_place_lat,
-            defaults={'description_short': row_place['description_short'],
-                      'description_long': row_place['description_long']},
+            defaults={'description_short': row_place.get('description_short', ''),
+                      'description_long': row_place.get('description_long', '')},
         )
 
         if not place_created:
             print(f'Место "{row_place["title"]}" уже есть в базе данных.')
             return
         print(f'Добавлено место "{row_place["title"]}".')
-        for image_num, image_url in enumerate(row_place['imgs']):
+        for image_num, image_url in enumerate(row_place.get('imgs', '')):
             response = requests.get(image_url)
             response.raise_for_status()
             image_name = Path(urlparse(image_url).path).name
