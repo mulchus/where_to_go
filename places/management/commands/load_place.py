@@ -35,21 +35,21 @@ class Command(BaseCommand):
 
         if not place_created:
             print(f'Место "{new_place["title"]}" уже есть в базе данных.')
-        else:
-            print(f'Добавлено место "{new_place["title"]}".')
-            for image_num, image_url in enumerate(new_place['imgs']):
-                response = requests.get(image_url)
-                response.raise_for_status()
-                image_name = Path(urlparse(image_url).path).name
-                file_path = Path(MEDIA_ROOT).joinpath(image_name)
-                with open(file_path, 'wb') as file:
-                    file.write(response.content)
-                image, image_created = Image.objects.get_or_create(
-                    image=image_name,
-                    place_id=place.id,
-                    defaults={'sequence_number': image_num, },
-                )
-                if not image_created:
-                    print(f'Фотография "{image.image}" уже имеется в базе данных у данной локации.')
-                else:
-                    print(f'Добавлена фотография "{image.image}".')
+            return
+        print(f'Добавлено место "{new_place["title"]}".')
+        for image_num, image_url in enumerate(new_place['imgs']):
+            response = requests.get(image_url)
+            response.raise_for_status()
+            image_name = Path(urlparse(image_url).path).name
+            file_path = Path(MEDIA_ROOT).joinpath(image_name)
+            with open(file_path, 'wb') as file:
+                file.write(response.content)
+            image, image_created = Image.objects.get_or_create(
+                image=image_name,
+                place_id=place.id,
+                defaults={'sequence_number': image_num, },
+            )
+            if not image_created:
+                print(f'Фотография "{image.image}" уже имеется в базе данных у данной локации.')
+            else:
+                print(f'Добавлена фотография "{image.image}".')
