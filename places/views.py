@@ -1,12 +1,8 @@
 from django.shortcuts import render
 from .models import Place
-from pathlib import Path
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
-
-
-BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 def start(request):
@@ -40,15 +36,15 @@ def place_view(request, place_id):
     images = []
     place_images = place.images.all()
     for image in place_images:
-        images.append(image.image.url[1:])
+        images.append(image.image.url)
     details_url = {
         'title': place.title,
         'imgs': images,
         'description_short': place.description_short,
         'description_long': place.description_long,
         'coordinates': {
-            'lng': str(place.lng),
-            'lat': str(place.lat)
+            'lng': place.lng,
+            'lat': place.lat
         }
     }
     return JsonResponse(details_url, json_dumps_params={'indent': 4, 'ensure_ascii': False})
