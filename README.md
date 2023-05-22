@@ -45,24 +45,13 @@ python manage.py load_place "https://github.com/.....places/Коворкинг G
 ![загрузка мест](https://github.com/mulchus/where_to_go/assets/111083714/c0fed6eb-10e2-4d98-aea6-86148a1d481c)  
 
 
-## Установка и запуск
-
-Для запуска сайта у вас уже должен быть установлен Python не ниже 3й версии. 
-
-- Скачайте код
-- Установите зависимости командой `pip install -r requirements.txt`
-- Создайте файл базы данных и примените все миграции - командой `python manage.py migrate`
-- Запустите сервер командой `python manage.py runserver`
-
-Сайт будет работать по ссылке [127.0.0.1:8000](http://127.0.0.1:8000).  
-
-
 ## Переменные окружения
 
 Часть настроек проекта берётся из переменных окружения. Чтобы их определить, создайте файл `.env` рядом с `manage.py` и запишите туда данные в таком формате: `ПЕРЕМЕННАЯ = значение`:  
 - `SECRET_KEY` — секретный ключ проекта в Django. Например: `erofheronoirenfoernfx49389f43xf3984xf9384`.  
 - `DEBUG` — дебаг-режим. Поставьте `True`, чтобы увидеть отладочную информацию в случае ошибки. Выключается значением `False`.  
 - `ALLOWED_HOSTS` — по умолчанию заданы localhost и 127.0.0.1.  
+- `STATIC_ROOT` - папка для сбора статики сайта при размещении на сервере, например "assets". Нельзя задавать "static".  
 - `CSRF_TRUSTED_ORIGINS = http://subdomen.domen.com` - домен/субдомен сайта.  
 - `SECURE_REDIRECT_EXEMPT = (r'subdomen.domen.com|', )` - домен/субдомен сайта.  
 [документация Django](https://docs.djangoproject.com/en/3.1/ref/settings/#allowed-hosts).
@@ -75,6 +64,19 @@ python manage.py load_place "https://github.com/.....places/Коворкинг G
 - `SECURE_HSTS_INCLUDE_SUBDOMAINS = True`
 - `SECURE_SSL_REDIRECT = True`  
 [документация по настройкам Django Deployment checklist](https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/).
+
+
+## Установка и запуск
+
+Для запуска сайта у вас уже должен быть установлен Python не ниже 3й версии. 
+
+- Скачайте код
+- Создайте файл с переменными окружения.
+- Установите зависимости командой `pip install -r requirements.txt`
+- Создайте файл базы данных и примените все миграции - командой `python manage.py migrate`
+- Запустите сервер командой `python manage.py runserver`
+
+Сайт будет работать по ссылке [127.0.0.1:8000](http://127.0.0.1:8000).  
 
 
 ## Цели проекта
