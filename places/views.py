@@ -3,6 +3,7 @@ from .models import Place
 from pathlib import Path
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
+from django.urls import reverse
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -12,7 +13,7 @@ def start(request):
     serialized_places = []
     places = Place.objects.all()
     for place in places:
-        details_url = f'/places/{place.pk}'
+        details_url = f'{reverse("places_url")}{place.pk}'
         one_place = {
             'type': 'Feature',
             'geometry': {
@@ -37,7 +38,7 @@ def start(request):
 def place_view(request, place_id):
     place = get_object_or_404(Place, pk=place_id)
     images = []
-    place_images = place.images.all().order_by('sequence_number')
+    place_images = place.images.all()
     for image in place_images:
         images.append(image.image.url[1:])
     details_url = {
