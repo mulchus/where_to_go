@@ -9,7 +9,7 @@ def start(request):
     serialized_places = []
     places = Place.objects.all()
     for place in places:
-        details_url = f'{reverse("places_url")}{place.pk}'
+        details_url = reverse('place_api', args=[place.pk])
         one_place = {
             'type': 'Feature',
             'geometry': {
