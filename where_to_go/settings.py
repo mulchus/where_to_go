@@ -143,8 +143,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-if not DEBUG:
-    STATIC_ROOT = os.path.join(BASE_DIR, env.str('STATIC_ROOT'))
+STATIC_ROOT = env.str('STATIC_ROOT')
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static/where_to_go'),
