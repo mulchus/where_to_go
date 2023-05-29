@@ -6,40 +6,31 @@ from django.urls import reverse
 
 
 def start(request):
-    serialized_places = []
-    places = Place.objects.all()
-    for place in places:
-        details_url = reverse('place_api', args=[place.pk])
-        one_place = {
-            'type': 'Feature',
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [place.lng, place.lat],
-            },
-            'properties': {
-                'title': place.title,
-                'placeId': place.pk,
-                'detailsUrl': details_url,
-            }
-        }
-        serialized_places.append(one_place)
-
     serialized_places = {
         'type': 'FeatureCollection',
-        'features': serialized_places,
+        'features': [
+            {
+                'type': 'Feature',
+                'geometry': {
+                    'type': 'Point',
+                    'coordinates': [place.lng, place.lat],
+                },
+                'properties': {
+                    'title': place.title,
+                    'placeId': place.pk,
+                    'detailsUrl': reverse('place_api', args=[place.pk]),
+                }
+            } for place in Place.objects.all()
+        ]
     }
     return render(request, 'index.html', {'serialized_places': serialized_places})
 
 
 def place_view(request, place_id):
     place = get_object_or_404(Place, pk=place_id)
-    images = []
-    place_images = place.images.all()
-    for image in place_images:
-        images.append(image.image.url)
     details_url = {
         'title': place.title,
-        'imgs': images,
+        'imgs': [image.image.url for image in place.images.all()],
         'description_short': place.description_short,
         'description_long': place.description_long,
         'coordinates': {
