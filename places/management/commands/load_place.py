@@ -11,11 +11,12 @@ class Command(BaseCommand):
     help = 'Добавить место на карту'
 
     def add_arguments(self, parser):
-        parser.add_argument('url_about_place',
-                            nargs='?',
-                            type=str,
-                            help='Добавить место на карту',
-                            )
+        parser.add_argument(
+            'url_about_place',
+            nargs='?',
+            type=str,
+            help='Добавить место на карту',
+        )
 
     def handle(self, *args, **options):
         response = requests.get(options['url_about_place'])
@@ -28,8 +29,10 @@ class Command(BaseCommand):
             title=row_place['title'],
             lng=row_place_lng,
             lat=row_place_lat,
-            defaults={'description_short': row_place.get('description_short', ''),
-                      'description_long': row_place.get('description_long', '')},
+            defaults={
+                'description_short': row_place.get('description_short', ''),
+                'description_long': row_place.get('description_long', '')
+            },
         )
 
         if not place_created:

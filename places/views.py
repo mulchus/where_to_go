@@ -14,7 +14,7 @@ def start(request):
             'type': 'Feature',
             'geometry': {
                 'type': 'Point',
-                'coordinates': [place.lng, place.lat]
+                'coordinates': [place.lng, place.lat],
             },
             'properties': {
                 'title': place.title,
@@ -26,7 +26,7 @@ def start(request):
 
     serialized_places = {
         'type': 'FeatureCollection',
-        'features': serialized_places
+        'features': serialized_places,
     }
     return render(request, 'index.html', {'serialized_places': serialized_places})
 
@@ -44,7 +44,7 @@ def place_view(request, place_id):
         'description_long': place.description_long,
         'coordinates': {
             'lng': place.lng,
-            'lat': place.lat
+            'lat': place.lat,
         }
     }
     return JsonResponse(details_url, json_dumps_params={'indent': 4, 'ensure_ascii': False})
