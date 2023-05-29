@@ -44,9 +44,9 @@ class Command(BaseCommand):
             response.raise_for_status()
             image_name = Path(urlparse(image_url).path).name
             image_file = ContentFile(response.content, name=image_name)
-            image, image_created = Image.objects.create(
+            image = Image.objects.create(
                 image=image_file,
                 place_id=place.id,
-                defaults={'sequence_number': image_num, },
+                sequence_number=image_num,
             )
             print(f'Добавлена фотография "{image.image}".')
