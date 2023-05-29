@@ -51,7 +51,8 @@ python manage.py load_place "https://github.com/.....places/Коворкинг G
 - `SECRET_KEY` — секретный ключ проекта в Django. Например: `erofheronoirenfoernfx49389f43xf3984xf9384`.  
 - `DEBUG` — дебаг-режим. Поставьте `True`, чтобы увидеть отладочную информацию в случае ошибки. Выключается значением `False`.  
 - `ALLOWED_HOSTS` — по умолчанию заданы localhost и 127.0.0.1.  
-- `STATIC_ROOT` - папка для сбора статики сайта при размещении на сервере, например "assets". Нельзя задавать "static".  
+- `STATIC_ROOT` - полный путь до папки для сбора статики сайта при размещении на сервере,  
+   например "E:\Python\where_to_go\assets". Нельзя задавать "...\static".  
 - `CSRF_TRUSTED_ORIGINS = http://subdomen.domen.com` - домен/субдомен сайта.  
 [документация Django](https://docs.djangoproject.com/en/3.1/ref/settings/#allowed-hosts).
 
