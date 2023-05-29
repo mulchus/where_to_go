@@ -28,7 +28,7 @@ def start(request):
 
 def place_view(request, place_id):
     place = get_object_or_404(Place, pk=place_id)
-    details_url = {
+    place_parameters = {
         'title': place.title,
         'imgs': [image.image.url for image in place.images.all()],
         'description_short': place.description_short,
@@ -38,4 +38,4 @@ def place_view(request, place_id):
             'lat': place.lat,
         }
     }
-    return JsonResponse(details_url, json_dumps_params={'indent': 4, 'ensure_ascii': False})
+    return JsonResponse(place_parameters, json_dumps_params={'indent': 4, 'ensure_ascii': False})
